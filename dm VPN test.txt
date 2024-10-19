@@ -99,30 +99,30 @@ SITE1-R1: odd:
 CONFIG T
 crypto isakmp policy 1
  authentication pre-share
-crypto isakmp key cisco address 200.0.0.11
+crypto isakmp key cisco address 200.0.0.21
 !         
 crypto ipsec transform-set strong esp-3des esp-sha-hmac 
 !
 crypto map vpn 2 ipsec-isakmp 
- set peer 200.0.0.11
+ set peer 200.0.0.21
  set transform-set strong 
  match address 102
 !
 no int tunnel 1
 interface Tunnel2
  description vpn-GRE TUNNEL TO von11
- ip address 172.11.12.2 255.255.255.0
- tunnel source 200.0.0.12
- tunnel destination 200.0.0.11
+ ip address 172.11.21.2 255.255.255.0
+ tunnel source 200.0.0.11
+ tunnel destination 200.0.0.21
 !
 !
 no router ospf 1
 router ospf 1
- network 172.11.12.0 0.0.0.255 area 0
- network 10.12.1.0 0.0.0.255 area 0
+ network 172.11.21.0 0.0.0.255 area 0
+ network 10.11.1.0 0.0.0.255 area 0
 !
 !
-access-list 102 permit gre host 200.0.0.12 host 200.0.0.11
+access-list 102 permit gre host 200.0.0.11 host 200.0.0.21
 !
 
 
